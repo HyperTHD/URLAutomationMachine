@@ -69,7 +69,12 @@ def main(args):
         sys.exit(1)
       sys.exit(0)
     elif (args.t):
+      try:
         threading.Thread(target=checkTelescope(args.t, args.j)).start()
+      except:
+        sys.stderr.write("No urls are good, exiting")
+        sys.exit(1)
+      sys.exit(0)
     elif (args.v):
       print("URLAutomationMachine Ver 2.0")
     else:
