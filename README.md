@@ -23,6 +23,11 @@ To see your output in a JSON format, type the following:
 
 ```urlChecker -j ```
 
+This url machine function also allows you to check the telescope project and run this program using the 10 
+latest blog posts urls posted. Run telescope locally first, then, to check each url, type the following:
+
+```urlChecker -t```
+
 
 To run the program as written above, enter the following into your terminal
 

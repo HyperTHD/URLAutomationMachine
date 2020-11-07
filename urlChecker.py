@@ -32,6 +32,20 @@ def checkFile(fileInput, isJson=False, ignore=None):
     input.processFile()
 
 
+# checkTelescope function makes a request to "Telescope" to parse the 10 latest post urls 
+# to check whether the urls are broken or not. Displays output based on -j argument
+# Params: inputFile, isJson
+# Return: void
+
+def checkTelescope(fileInput=None, isJson=False):
+  if isJson:
+    input = urlAutomationMachine(fileInput, isJson)
+    input.processTelescope()
+  else:
+    input = urlAutomationMachine(fileInput)
+    input.processTelescope()
+
+
 # Main function parses each line looking for urls to check and make requests
 # to check whether the url is broken or not. Calls the appropriate check function
 # based on the argument passed
@@ -44,16 +58,18 @@ def main(args):
       try:
         threading.Thread(target=checkFile(args.f, args.j, args.i)).start()
       except:
-        sys.stderr.write("No URLS are good, exiting")
+        sys.stderr.write("No urls are good, exiting")
         sys.exit(1)
       sys.exit(0)
     elif (args.u):
       try:
         threading.Thread(target=checkURL(args.u, args.j)).start()
       except:
-        sys.stderr.write("No URLS are good, exiting")
+        sys.stderr.write("No urls are good, exiting")
         sys.exit(1)
       sys.exit(0)
+    elif (args.t):
+        threading.Thread(target=checkTelescope(args.t, args.j)).start()
     elif (args.v):
       print("URLAutomationMachine Ver 2.0")
     else:
@@ -73,6 +89,7 @@ if __name__ == "__main__":
    parse.add_argument('-u', help="The URL to check")
    parse.add_argument('-j', action="store_true", help="Displays output in JSON format")
    parse.add_argument('-i', help="Ignores any url that matches the argument")
+   parse.add_argument('-t', action='store_true', help='Will ignore the file given and instead check the 10 latest posts to telescope')
    args = parse.parse_args()
 
    main(args)

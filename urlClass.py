@@ -1,5 +1,6 @@
 import urllib3
 import re
+import json
 from colorama import Fore, init
 
 # Class urlAutomationMachine
@@ -9,7 +10,7 @@ from colorama import Fore, init
 
 class urlAutomationMachine:
 
-    def __init__(self, input, isJson=False, ignore=None):
+    def __init__(self, input=None, isJson=False, ignore=None):
         self.input = input
         self.listOfUrls = []
         self.isJson = isJson
@@ -60,3 +61,18 @@ class urlAutomationMachine:
                 print(Fore.RED + f"[FAILURE]: {url} fails automation. This url is broken unfortunately!")
             else:
                 print(Fore.WHITE + f"[UNKNOWN] {url} gives off a warning. This url is fishy!")
+
+
+
+    def processTelescope(self):
+        telescopeURL = 'http://localhost:3000/posts' # Local host telescope url to grab data locally
+        try:
+            posts = self.http.request('GET', telescopeURL)
+            posts = json.loads(posts.data)
+            for post in posts:
+                self.makeRequest(f"{telescopeURL}/{post['id']}")
+        except urllib3.exceptions.MaxRetryError as e: # At this point, the connection attempt timed out and therfore, the url cannot be reached, so in this case, we skip the url entirely.
+            print(str(e))
+
+     
+    
