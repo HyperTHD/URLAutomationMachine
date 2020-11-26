@@ -1,11 +1,8 @@
 {
     "editor.formatOnSave": true,
     "python.formatting.provider": "black",
-    "python.terminal.activateEnvInCurrentTerminal": true,
-    "python.linting.pylintArgs": ["--reports", "12", "--disable", "I0011"],
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.linting.maxNumberOfProblems": 50,
     "python.linting.pylintEnabled": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

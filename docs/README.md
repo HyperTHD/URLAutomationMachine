@@ -16,3 +16,8 @@ The machine we all need but the one we most likely do not deserve. The url check
 
 I welcome any and all contributions to this project. Please make sure to follow the instructions in the contributing
 file in order to effectively develop on this project.
+You can read more [here](CONTRIBUTING)
+
+# Licensing:
+
+This project is distributed under the MIT License which can be found [here](LICENSE)

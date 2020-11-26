@@ -4,36 +4,33 @@ To setup this project:
     1- First fork the repo
     2- Clone the repository to your local machine
     3- Enter the following command to install all external dependencies
-        `pip3 install --editable .`
+        `pip install -r requirements.txt`
     4- Make a new branch to work on your issue of choice using `git checkout -b NAMEOFBRANCH`
 
 # Usage
 
-Usage can be found by typing ```urlChecker --help```
+Usage can be found by typing ```python url_checker.py --help```
 
 Used by typing in:
 
-```urlChecker -f inputFile```
+```python url_checker.py -f inputFile```
 
 Check the version of the program by typing in:
 
-```urlChecker -v```
+```python url_checker.py -v```
 
 To check a single url, type the following:
 
-```urlChecker -u NAMEOFURL```
+```python url_checker.py -u NAMEOFURL```
 
 To see your output in a JSON format, type the following:
 
-```urlChecker -j ```
+```python url_checker.py -j ```
 
 This url machine function also allows you to check the telescope project and run this program using the 10
 latest blog posts urls posted. Run telescope locally first, then, to check each url, type the following:
 
-```urlChecker -t```
-
-To run the program as written above, enter the following into your terminal
-
+```python url_checker.py -t```
 
 ## Running the code formatter
 
@@ -47,6 +44,13 @@ You can also use the shell script `code-formatter.sh` to run the "black" formatt
 The code linter will be ran every time you save the file by default on VSCode.
 
 You can also use the shell script `py-linter-checker.sh` to run the "pylint" checker to ensure your files are styled correctly.
+
+## Testing Coverage
+
+This project utilizes the "pytest" module to create unit tests and test suites for the program. If you're planning on adding any new tests,
+please put them in the "tests" folder. If you're planning on making a test suite, make a folder inside the tests folder and put your test suit there.
+
+From the root folder of the project, type `pytest` in order to run the tests created.
 
 ## Making a Pull Request
 
