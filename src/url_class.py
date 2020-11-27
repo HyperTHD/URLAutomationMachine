@@ -39,7 +39,9 @@ class urlAutomationMachine:
         if self.input is not None:
             if type(self.input) == str:
                 fileToCheck = open(self.input, "r")
-                self.listOfUrls = re.findall(r"https?:[a-zA-Z0-9_.+-/#~]+", fileToCheck.read())
+                self.listOfUrls = re.findall(
+                    r"https?:[a-zA-Z0-9_.+-/#~]+", fileToCheck.read()
+                )
 
                 if self.listOfUrls == []:
                     pass

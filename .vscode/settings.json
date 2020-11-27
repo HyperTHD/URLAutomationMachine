@@ -1,8 +1,6 @@
 {
-    "editor.formatOnSave": true,
     "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.linting.maxNumberOfProblems": 50,
     "python.linting.pylintEnabled": true,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
 }

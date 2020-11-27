@@ -15,7 +15,6 @@ def test_process_url_passed(example_urls):
     url = example_urls[0]
 
     test_url = urlAutomationMachine(url)
-
     test_url.processUrl()
 
     assert (test_url.getStatus()) == 200
@@ -39,12 +38,14 @@ def test_url_unknown(example_urls):
 
     assert (test_url.getStatus()) == 403
 
+
 def test_url_is_correct():
     url = "https://www.google.ca"
 
     test_url = urlAutomationMachine(url)
 
     assert (test_url.checkUrl()) == url
+
 
 def test_url_is_not_correct():
     url = "htt://www.google.ca"
@@ -59,8 +60,9 @@ def test_file_upload_empty():
 
     with pytest.raises(AttributeError) as error_value:
         test_url.processFile()
-    
+
     assert "A parameter is required" in str(error_value)
+
 
 def test_file_upload_is_not_file():
     test_url = urlAutomationMachine({})
