@@ -66,21 +66,21 @@ def main(arguments):
             threading.Thread(
                 target=check_file(arguments.f, arguments.j, arguments.i)
             ).start()
-        except Exception as error_exception:
+        except ValueError as error_exception:
             sys.stderr.write(str(error_exception))
             sys.exit(1)
         sys.exit(0)
     elif arguments.u:
         try:
             threading.Thread(target=check_url(arguments.u, arguments.j)).start()
-        except Exception as error_exception:
+        except ValueError as error_exception:
             sys.stderr.write(str(error_exception))
             sys.exit(1)
         sys.exit(0)
     elif arguments.t:
         try:
             threading.Thread(target=check_telescope(arguments.t, arguments.j)).start()
-        except Exception as error_exception:
+        except ValueError as error_exception:
             sys.stderr.write(str(error_exception))
             sys.exit(1)
         sys.exit(0)

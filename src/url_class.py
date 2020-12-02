@@ -1,17 +1,12 @@
-import urllib3
 import re
 import json
+import urllib3
 from colorama import Fore, init
-
-# Class urlAutomationMachine
-# Defines a urlAutomationMachine object which initiates the request in order to determine the status
-# code of the url. If a file is passed, a regex will be processed on all lines in the file in order
-# to pull out the urls and for each url, a network request attempt will occur.
 
 
 class urlAutomationMachine:
-    def __init__(self, input=None, isJson=False, ignore=None):
-        self.input = input
+    def __init__(self, file_input=None, isJson=False, ignore=None):
+        self.file_input = file_input
         self.listOfUrls = []
         self.isJson = isJson
         self.http = urllib3.PoolManager()
@@ -25,20 +20,20 @@ class urlAutomationMachine:
             )
 
     def processUrl(self):
-        if self.input is not None:
-            if type(self.input) == str:
+        if self.file_input is not None:
+            if isinstance(self.file_input, str):
                 try:
-                    self.checkUrl()
-                    self.makeRequest(self.input)
-                except:
-                    raise ValueError("Input was not a valid URL")
+                    if (self.checkUrl()) is not None:
+                        self.makeRequest(self.file_input)
+                except ValueError as error_exe:
+                    raise ValueError("Input was not a valid URL") from error_exe
         else:
             raise AttributeError("Function requires a url that's a string")
 
     def processFile(self):
-        if self.input is not None:
-            if type(self.input) == str:
-                fileToCheck = open(self.input, "r")
+        if self.file_input is not None:
+            if isinstance(self.file_input, str):
+                fileToCheck = open(self.file_input, "r")
                 self.listOfUrls = re.findall(
                     r"https?:[a-zA-Z0-9_.+-/#~]+", fileToCheck.read()
                 )
@@ -65,7 +60,7 @@ class urlAutomationMachine:
             self.printOutput(r, url)
         except urllib3.exceptions.MaxRetryError as e:  # At this point, the connection attempt timed out and therfore, the url cannot be reached, so in this case, we skip the url entirely.
             print("Url does not load fast enough")
-            pass
+            print(str(e))
 
     def printOutput(self, r, url):
         if self.isJson:
@@ -106,19 +101,18 @@ class urlAutomationMachine:
         return self.response_status.status
 
     def processTelescope(self):
-        telescopeURL = "http://localhost:3000/posts"  # Local host telescope url to grab data locally
+        telescopeURL = "http://localhost:3000/posts"
         try:
             posts = self.http.request("GET", telescopeURL)
             posts = json.loads(posts.data)
             for post in posts:
                 self.makeRequest(f"{telescopeURL}/{post['id']}")
-        except urllib3.exceptions.MaxRetryError as e:  # At this point, the connection attempt timed out and therfore, the url cannot be reached, so in this case, we skip the url entirely.
+        except urllib3.exceptions.MaxRetryError as e:
             print(str(e))
 
     def checkUrl(self) -> str or None:
-        valid_search = re.search(r"https?:[a-zA-Z0-9_.+-/#~]+", self.input)
+        valid_search = re.search(r"https?:[a-zA-Z0-9_.+-/#~]+", self.file_input)
 
         if valid_search is not None:
             return valid_search.string
-        else:
-            return None
+        return None
