@@ -1,2 +1,7 @@
 urlChecker.egg-info
 __pycache__
+UrlAutomationMachine.egg-info
+.pypirc
+build
+dist
+.pytest_cache

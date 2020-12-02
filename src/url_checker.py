@@ -2,61 +2,41 @@
 import threading
 import sys
 import argparse
-from src.url_class import urlAutomationMachine
 
-# checkURL function parses a url and make a request to check whether the url is broken or not.
-# Displays output based on -j argument
-# Params: inputFile, isJson
-# Return: void
+try:
+    from src import url_class
+except ModuleNotFoundError:
+    import url_class
 
 
 def check_url(file_input, is_json=False):
     """Creates a machine object to process a single URL"""
     if is_json:
-        url_machine = urlAutomationMachine(file_input, is_json)
+        url_machine = url_class.urlAutomationMachine(file_input, is_json)
         url_machine.processUrl()
     else:
-        url_machine = urlAutomationMachine(file_input)
+        url_machine = url_class.urlAutomationMachine(file_input)
         url_machine.processUrl()
-
-
-# checkFile function parses each line looking for urls to check and make requests
-# to check whether the url is broken or not. Displays output based on -j argument
-# Params: inputFile, isJson
-# Return: void
 
 
 def check_file(file_input, is_json=False, ignore=None):
     """Creates a machine object to process a file of URLs"""
     if is_json:
-        url_machine = urlAutomationMachine(file_input, is_json, ignore)
+        url_machine = url_class.urlAutomationMachine(file_input, is_json, ignore)
         url_machine.processFile()
     else:
-        url_machine = urlAutomationMachine(file_input, False, ignore)
+        url_machine = url_class.urlAutomationMachine(file_input, False, ignore)
         url_machine.processFile()
-
-
-# checkTelescope function makes a request to "Telescope" to parse the 10 latest post urls
-# to check whether the urls are broken or not. Displays output based on -j argument
-# Params: inputFile, isJson
-# Return: void
 
 
 def check_telescope(file_input=None, is_json=False):
     """Creates a machine object to process the 10 latest telescope posts"""
     if is_json:
-        url_machine = urlAutomationMachine(file_input, is_json)
+        url_machine = url_class.urlAutomationMachine(file_input, is_json)
         url_machine.processTelescope()
     else:
-        url_machine = urlAutomationMachine(file_input)
+        url_machine = url_class.urlAutomationMachine(file_input)
         url_machine.processTelescope()
-
-
-# Main function parses each line looking for urls to check and make requests
-# to check whether the url is broken or not. Calls the appropriate check function
-# based on the argument passed
-# Param: inputFile
-# Return: void
 
 
 def main(arguments):
@@ -84,18 +64,18 @@ def main(arguments):
             sys.stderr.write(str(error_exception))
             sys.exit(1)
         sys.exit(0)
-    elif arguments.v:
-        print("URLAutomationMachine Ver 2.0")
     else:
         print(
             """This program has two arguments, one for inputting the file,
         the second one displays the current version of the program"""
         )
         print("Usage: urlChecker [-f] inputFile: The input file to be processed")
-        print("Usage: urlChecker [-v]: Displays current version of the program")
         print("Usage: urlChecker [-u] inputUrl: Checks URL to see if it works or not")
         print("Usage: urlChecker [-j]: Displays result in JSON format")
         print("Usage: urlChecker [-i]: Ignores the URL that's passed as an argument")
+        print(
+            "Usage: urlChecker [-t]: Checks the urls of the 10 latest telescope posts"
+        )
 
 
 if __name__ == "__main__":
@@ -104,9 +84,6 @@ if __name__ == "__main__":
         description="Checks the file input for any broken HTML urls"
     )
     parse.add_argument("-f", help="The input file to check")
-    parse.add_argument(
-        "-v", action="store_true", help="Displays current version of program"
-    )
     parse.add_argument("-u", help="The URL to check")
     parse.add_argument("-j", action="store_true", help="Displays output in JSON format")
     parse.add_argument("-i", help="Ignores any url that matches the argument")
