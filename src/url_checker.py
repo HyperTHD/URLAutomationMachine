@@ -39,8 +39,9 @@ def check_telescope(file_input=None, is_json=False):
         url_machine.processTelescope()
 
 
-def main(arguments):
+def main():
     """Main function creates a thread based on argument passed to main program"""
+    arguments = setupArgs()
     if arguments.f:
         try:
             threading.Thread(
@@ -78,8 +79,7 @@ def main(arguments):
         )
 
 
-if __name__ == "__main__":
-
+def setupArgs():
     parse = argparse.ArgumentParser(
         description="Checks the file input for any broken HTML urls"
     )
@@ -90,8 +90,12 @@ if __name__ == "__main__":
     parse.add_argument(
         "-t",
         action="store_true",
-        help="Will ignore the file given and instead check the 10 latest posts to telescope",
+        help="Will check the 10 latest posts to telescope",
     )
     args = parse.parse_args()
 
-    main(args)
+    return args
+
+
+if __name__ == "__main__":
+    main()
