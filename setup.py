@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="UrlAutomationMachine",
-    version="1.0.0",
+    version="1.0.4",
     author="Abdulbasid Guled",
     author_email="aguled5@myseneca.ca",
     description="A CMD tool designed to check the status codes of urls",
@@ -18,6 +18,13 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    entry_points={"console_scripts": ["urlChecker = src.url_checker:main"]},
+    install_requires=[
+        "urllib3 == 1.25.10",
+        "colorama == 0.4.4",
+        "black == 20.8b1",
+        "pytest == 6.1.2",
+        "argparse == 1.1",
+    ],
+    entry_points={"console_scripts": ["UrlAutomationMachine = src.url_checker:main"]},
     python_requires=">=3.6",
 )

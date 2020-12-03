@@ -1,4 +1,4 @@
-## Setup
+# Setup
 
 To setup this project:
     1- First fork the repo
@@ -7,37 +7,32 @@ To setup this project:
         `pip install -r requirements.txt`
     4- Make a new branch to work on your issue of choice using `git checkout -b NAMEOFBRANCH`
 
-# Usage
+## Usage
 
-Usage can be found by typing ```python url_checker.py --help```
+Usage can be found by typing ```UrlAutomationMachine -h```
 
-Used by typing in:
+To check a file of given urls, type the following:
 
-```python url_checker.py -f inputFile```
-
-Check the version of the program by typing in:
-
-```python url_checker.py -v```
+```UrlAutomationMachine -f inputFile```
 
 To check a single url, type the following:
 
-```python url_checker.py -u NAMEOFURL```
+```UrlAutomationMachine -u NAMEOFURL```
 
 To see your output in a JSON format, type the following:
 
-```python url_checker.py -j ```
+```UrlAutomationMachine -j```
 
 This url machine function also allows you to check the telescope project and run this program using the 10
 latest blog posts urls posted. Run telescope locally first, then, to check each url, type the following:
 
-```python url_checker.py -t```
+```UrlAutomationMachine -t```
 
 ## Running the code formatter
 
 The code formatter will be ran every time you save the file by default on VSCode.
 
 You can also use the shell script `code-formatter.sh` to run the "black" formatter to format your files
-
 
 ## Running the linter
 
