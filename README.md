@@ -2,6 +2,8 @@
 
 The machine we all need but the one we most likely do not deserve. The url checking program we all desire
 
+![UrlAutomationMachine](/resources/urlAutomationMachine.png)
+
 Install this tool by using the following command:
 
 ```pip install UrlAutomationMachine```
